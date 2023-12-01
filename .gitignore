@@ -1,2 +1,2 @@
-.*target
+/.*/rust/target/
 /aoc1/rust/target/
