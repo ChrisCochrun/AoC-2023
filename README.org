@@ -1,0 +1,4 @@
+#+title: Advent of Code 2023
+#+author: Chris Cochrun
+
+I will be doing AoC this year for the first time. I think in order to help me learn a lot as a developer, I'll be doing it in both Rust and Lisp.

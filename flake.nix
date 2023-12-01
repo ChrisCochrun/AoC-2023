@@ -17,31 +17,31 @@
           };
         in rec
         {
-          devShell = {
-            with pkgs;
-            mkShell rec {
-              name = "aoc";
+          devShell = pkgs.mkShell {
+            name = "aoc";
+            
+            nativeBuildInputs = with pkgs; [
+              gcc
+            ];
+
+            buildInputs = with pkgs; [
+              stdenv
+              gnumake
+              pkg-config
+
+              # Lisp
+              sbcl
               
-              nativeBuildInputs = [
-                gcc
-              ];
+              # Rust
+              clippy
+              rustc
+              cargo
+              rustfmt
+              rust-analyzer
+            ];
 
-              buildInputs = [
-                stdenv
-                gnumake
-                pkg-config
-                
-                # Rust tools
-                clippy
-                rustc
-                cargo
-                rustfmt
-                rust-analyzer
-              ];
-
-              RUST_BACKTRACE = "full";
-              CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG = true;
-            }
+            RUST_BACKTRACE = "full";
+            CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG = true;
           };
         }
       );
