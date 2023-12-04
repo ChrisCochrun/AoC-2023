@@ -52,6 +52,9 @@
                                                  ))))))
                      (setf sum (+ sum (* highest-red highest-blue highest-green)))
                      ;; (if game-valid (setf sum (+ sum id)))
-                     (uiop:println sum))))
+                     (uiop:println sum)
+                     (uiop:println highest-red)
+                     (uiop:println highest-blue)
+                     (uiop:println highest-green))))
 
 ;; blah blah blah.
