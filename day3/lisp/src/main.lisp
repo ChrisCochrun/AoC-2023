@@ -10,7 +10,8 @@
 (defstruct num
   (x 0 :type integer)
   (y 0 :type integer)
-  (value :empty :type value))
+  (kind :empty :type value)
+  (value 0 :type integer))
 
 (setf value-list '())
 
@@ -20,12 +21,17 @@
     (iter (for char in (coerce line 'list))
       (uiop:println char)
       (generate i from 0)
-      (when (string= "." char)
-        (push (make-num :x (next i) :y index) value-list))
-      (when (digit-char-p char)
-        (push (make-num :x (next i) :y index :value :num ) value-list))
-      (when (and (not (string= "." char)) (not (digit-char-p char)))
-        (push (make-num :x (next i) :y index :value :symbol) value-list)))))
+      (cond ((string= "." char)
+             (push (make-num :x (next i) :y index) value-list))
+            ((digit-char-p char)
+             (push (make-num :x (next i) :y index
+                             :value (digit-char-p char)
+                             :kind :num) value-list))
+            (t (push (make-num :x (next i) :y index :kind :symbol) value-list))))))
+
+(iter (for item in value-list)
+  (if (eql (num-kind item) :num)
+      (uiop:println item)))
 
 ;; Useful for filtering list
 ;; :when (str:starts-with? "4" line)
