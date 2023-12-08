@@ -7,6 +7,8 @@
 
 (deftype value () '(member :empty :symbol :num))
 
+;; in lisp structs name-prop is the way to get values
+;; (setf name-prop x) is how to set them
 (defstruct num
   (x 0 :type integer)
   (y 0 :type integer)
@@ -29,9 +31,10 @@
                              :kind :num) value-list))
             (t (push (make-num :x (next i) :y index :kind :symbol) value-list))))))
 
+
 (iter (for item in value-list)
   (if (eql (num-kind item) :num)
-      (uiop:println item)))
+      (let (()))))
 
 ;; Useful for filtering list
 ;; :when (str:starts-with? "4" line)
